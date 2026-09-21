@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix Studio</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e, #16213e);
+    color: #fff;
+    min-height: 100vh;
+}
+header {
+    text-align: center;
+    padding: 50px 20px 30px;
+    position: relative;
+}
+h1 {
+    font-size: 2.5em;
+    color: #ff6b00;
+    text-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+    margin-bottom: 10px;
+}
+.subtitle { color: #aaa; font-size: 1.1em; }
+
+.lang-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 5px;
+}
+.lang-btn {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: 0.3s;
+}
+.lang-btn.active {
+    background: #ff6b00;
+    border-color: #ff6b00;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 8px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+}
+.tab-btn:hover { background: rgba(255, 107, 0, 0.2); }
+.tab-btn.active {
+    background: #ff6b00;
+    border-color: #ff6b00;
+    color: #fff;
+}
+
+.tab-content {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 12px;
+    padding: 30px;
+    min-height: 300px;
+}
+.tab-content h2 {
+    color: #ff6b00;
+    margin-bottom: 15px;
+}
+.tab-content p {
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+.price {
+    font-size: 1.5em;
+    color: #ff6b00;
+    font-weight: bold;
+    margin: 15px 0;
+}
+.buy-btn {
+    display: inline-block;
+    background: #ff6b00;
+    color: #fff;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.buy-btn:hover {
+    background: #ff8800;
+    transform: scale(1.05);
+}
+.hidden { display: none; }
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+.contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 107, 0, 0.3);
+    border-radius: 8px;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.3s;
+}
+.contact-link:hover {
+    background: rgba(255, 107, 0, 0.2);
+    border-color: #ff6b00;
+}
+.contact-link .label { color: #ff6b00; font-weight: bold; }
+.contact-link .value { color: #ccc; }
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    color: #666;
+    font-size: 0.9em;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="lang-switch">
+        <button class="lang-btn active" onclick="setLang('ru')">RU</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <h1>PHOENIX STUDIO</h1>
+    <p class="subtitle" id="subtitle">Разработка модов для SAMP</p>
+</header>
+
+<div class="container">
+
+    <div class="tabs">
+        <button class="tab-btn active" id="tab-test" onclick="openTab('test')">TEST SAMP v5.0</button>
+        <button class="tab-btn" id="tab-ultimate" onclick="openTab('ultimate')">ULTIMATE v2.0</button>
+        <button class="tab-btn" id="tab-mysql" onclick="openTab('mysql')">MySQL</button>
+        <button class="tab-btn" id="tab-compile" onclick="openTab('compile')">Компиляция</button>
+        <button class="tab-btn" id="tab-contact" onclick="openTab('contact')">Связь</button>
+    </div>
+
+    <div id="test" class="tab-content">
+        <h2>TEST SAMP v5.0</h2>
+        <p id="test-desc1">Базовый мод для SAMP с основными командами:</p>
+        <p id="test-desc2">• /freeadmin — выдать админку</p>
+        <p id="test-desc3">• /freeleader — выдать лидерку</p>
+        <p id="test-desc4">• /stats — статистика</p>
+        <p id="test-desc5">• /author — авторство</p>
+        <div class="price">50 ⭐</div>
+        <a class="buy-btn" id="buy-test" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20buy%20TEST%20SAMP%20v5.0" target="_blank">Купить</a>
+    </div>
+
+    <div id="ultimate" class="tab-content hidden">
+        <h2>SAMP ULTIMATE v2.0</h2>
+        <p id="ult-desc1">Mini-RP мод с системами:</p>
+        <p id="ult-desc2">• Регистрация/логин</p>
+        <p id="ult-desc3">• Банк, работы, фракции</p>
+        <p id="ult-desc4">• Админка (fly, tp, skin)</p>
+        <p id="ult-desc5">• Античит</p>
+        <p id="ult-desc6">• MySQL сохранение</p>
+        <div class="price">100 ⭐</div>
+        <a class="buy-btn" id="buy-ult" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20buy%20SAMP%20ULTIMATE%20v2.0" target="_blank">Купить</a>
+    </div>
+
+    <div id="mysql" class="tab-content hidden">
+        <h2 id="mysql-title">Подключение MySQL</h2>
+        <p id="mysql-desc1">Настрою базу данных для твоего мода:</p>
+        <p id="mysql-desc2">• Создание таблиц</p>
+        <p id="mysql-desc3">• Настройка конфигов</p>
+        <p id="mysql-desc4">• Проверка подключения</p>
+        <p id="mysql-desc5">• Работает только с моими модами</p>
+        <div class="price">15 ⭐</div>
+        <a class="buy-btn" id="buy-mysql" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20order%20MySQL%20connection" target="_blank">Заказать</a>
+    </div>
+
+    <div id="compile" class="tab-content hidden">
+        <h2 id="compile-title">Компиляция .pwn → .amx</h2>
+        <p id="compile-desc1">Скомпилирую твой мод:</p>
+        <p id="compile-desc2">• Любой размер</p>
+        <p id="compile-desc3">• Быстро и качественно</p>
+        <p id="compile-desc4">• Если ошибки — исправлю</p>
+        <div class="price">250 ⭐</div>
+        <a class="buy-btn" id="buy-compile" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20order%20compilation%20.pwn%20to%20.amx" target="_blank">Заказать</a>
+    </div>
+
+    <div id="contact" class="tab-content hidden">
+        <h2 id="contact-title">Связь</h2>
+        <p id="contact-desc">Напиши нам по любому вопросу:</p>
+        <div class="contact-links">
+            <a class="contact-link" href="https://t.me/phoenixstudiosamp" target="_blank">
+                <span class="label" id="contact-channel">📢 Канал студии</span>
+                <span class="value">@phoenixstudiosamp</span>
+            </a>
+            <a class="contact-link" href="https://t.me/phoenix_aristocrat" target="_blank">
+                <span class="label" id="contact-manager">💬 Менеджер</span>
+                <span class="value">@phoenix_aristocrat</span>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 Phoenix Studio | @phoenixstudiosamp
+</footer>
+
+<script>
+let currentLang = 'ru';
+
+const translations = {
+    ru: {
+        subtitle: "Разработка модов для SAMP",
+        testDesc1: "Базовый мод для SAMP с основными командами:",
+        testDesc2: "• /freeadmin — выдать админку",
+        testDesc3: "• /freeleader — выдать лидерку",
+        testDesc4: "• /stats — статистика",
+        testDesc5: "• /author — авторство",
+        ultDesc1: "Mini-RP мод с системами:",
+        ultDesc2: "• Регистрация/логин",
+        ultDesc3: "• Банк, работы, фракции",
+        ultDesc4: "• Админка (fly, tp, skin)",
+        ultDesc5: "• Античит",
+        ultDesc6: "• MySQL сохранение",
+        mysqlTitle: "Подключение MySQL",
+        mysqlDesc1: "Настрою базу данных для твоего мода:",
+        mysqlDesc2: "• Создание таблиц",
+        mysqlDesc3: "• Настройка конфигов",
+        mysqlDesc4: "• Проверка подключения",
+        mysqlDesc5: "• Работает только с моими модами",
+        compileTitle: "Компиляция .pwn → .amx",
+        compileDesc1: "Скомпилирую твой мод:",
+        compileDesc2: "• Любой размер",
+        compileDesc3: "• Быстро и качественно",
+        compileDesc4: "• Если ошибки — исправлю",
+        contactTitle: "Связь",
+        contactDesc: "Напиши нам по любому вопросу:",
+        contactChannel: "📢 Канал студии",
+        contactManager: "💬 Менеджер",
+        buyTest: "Купить",
+        buyUlt: "Купить",
+        buyMysql: "Заказать",
+        buyCompile: "Заказать",
+        tabCompile: "Компиляция",
+        tabContact: "Связь"
+    },
+    en: {
+        subtitle: "SAMP Mods Development",
+        testDesc1: "Basic SAMP mod with commands:",
+        testDesc2: "• /freeadmin — give admin",
+        testDesc3: "• /freeleader — give leader",
+        testDesc4: "• /stats — statistics",
+        testDesc5: "• /author — author info",
+        ultDesc1: "Mini-RP mod with systems:",
+        ultDesc2: "• Registration/login",
+        ultDesc3: "• Bank, jobs, factions",
+        ultDesc4: "• Admin (fly, tp, skin)",
+        ultDesc5: "• Anticheat",
+        ultDesc6: "• MySQL saving",
+        mysqlTitle: "MySQL Connection",
+        mysqlDesc1: "Setup database for your mod:",
+        mysqlDesc2: "• Table creation",
+        mysqlDesc3: "• Config setup",
+        mysqlDesc4: "• Connection check",
+        mysqlDesc5: "• Works only with my mods",
+        compileTitle: "Compilation .pwn → .amx",
+        compileDesc1: "Compile your mod:",
+        compileDesc2: "• Any size",
+        compileDesc3: "• Fast and quality",
+        compileDesc4: "• Fix errors if any",
+        contactTitle: "Contact",
+        contactDesc: "Write us for any question:",
+        contactChannel: "📢 Studio Channel",
+        contactManager: "💬 Manager",
+        buyTest: "Buy",
+        buyUlt: "Buy",
+        buyMysql: "Order",
+        buyCompile: "Order",
+        tabCompile: "Compilation",
+        tabContact: "Contact"
+    }
+};
+
+function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+
+    document.getElementById('subtitle').textContent = t.subtitle;
+    document.getElementById('test-desc1').textContent = t.testDesc1;
+    document.getElementById('test-desc2').textContent = t.testDesc2;
+    document.getElementById('test-desc3').textContent = t.testDesc3;
+    document.getElementById('test-desc4').textContent = t.testDesc4;
+    document.getElementById('test-desc5').textContent = t.testDesc5;
+    document.getElementById('ult-desc1').textContent = t.ultDesc1;
+    document.getElementById('ult-desc2').textContent = t.ultDesc2;
+    document.getElementById('ult-desc3').textContent = t.ultDesc3;
+    document.getElementById('ult-desc4').textContent = t.ultDesc4;
+    document.getElementById('ult-desc5').textContent = t.ultDesc5;
+    document.getElementById('ult-desc6').textContent = t.ultDesc6;
+    document.getElementById('mysql-title').textContent = t.mysqlTitle;
+    document.getElementById('mysql-desc1').textContent = t.mysqlDesc1;
+    document.getElementById('mysql-desc2').textContent = t.mysqlDesc2;
+    document.getElementById('mysql-desc3').textContent = t.mysqlDesc3;
+    document.getElementById('mysql-desc4').textContent = t.mysqlDesc4;
+    document.getElementById('mysql-desc5').textContent = t.mysqlDesc5;
+    document.getElementById('compile-title').textContent = t.compileTitle;
+    document.getElementById('compile-desc1').textContent = t.compileDesc1;
+    document.getElementById('compile-desc2').textContent = t.compileDesc2;
+    document.getElementById('compile-desc3').textContent = t.compileDesc3;
+    document.getElementById('compile-desc4').textContent = t.compileDesc4;
+    document.getElementById('contact-title').textContent = t.contactTitle;
+    document.getElementById('contact-desc').textContent = t.contactDesc;
+    document.getElementById('contact-channel').textContent = t.contactChannel;
+    document.getElementById('contact-manager').textContent = t.contactManager;
+    document.getElementById('buy-test').textContent = t.buyTest;
+    document.getElementById('buy-ult').textContent = t.buyUlt;
+    document.getElementById('buy-mysql').textContent = t.buyMysql;
+    document.getElementById('buy-compile').textContent = t.buyCompile;
+    document.getElementById('tab-compile').textContent = t.tabCompile;
+    document.getElementById('tab-contact').textContent = t.tabContact;
+
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+function openTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.remove('hidden');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
