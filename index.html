@@ -147,6 +147,16 @@ header {
     font-size: 1.05em;
 }
 
+.warning {
+    color: #ff4444;
+    background: rgba(255, 68, 68, 0.1);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 10px;
+    padding: 12px 18px;
+    margin-top: 15px;
+    font-size: 0.95em;
+}
+
 .price {
     font-size: 2em;
     background: linear-gradient(135deg, #ff6b00, #ffaa00);
@@ -158,7 +168,6 @@ header {
 }
 
 .price.discounted {
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 15px;
@@ -239,7 +248,6 @@ footer {
     margin-top: 40px;
 }
 
-/* Промокод */
 .promo-popup {
     position: fixed;
     top: 50%;
@@ -315,12 +323,8 @@ footer {
     pointer-events: none;
     transition: opacity 0.4s ease;
 }
-.overlay.show {
-    opacity: 1;
-    pointer-events: all;
-}
+.overlay.show { opacity: 1; pointer-events: all; }
 
-/* Предупреждение при обновлении */
 .refresh-warning {
     position: fixed;
     bottom: 20px;
@@ -337,9 +341,7 @@ footer {
     text-align: center;
     max-width: 90%;
 }
-.refresh-warning.show {
-    transform: translateX(-50%) translateY(0);
-}
+.refresh-warning.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
@@ -381,13 +383,8 @@ footer {
         <p id="ult-desc3">• Банк (вклад/снятие)</p>
         <p id="ult-desc4">• Работы: курьер, шахтёр, рыбак</p>
         <p id="ult-desc5">• Фракции: полиция, медики</p>
-        <p id="ult-desc6">• Админка: выдать деньги, админку, скин</p>
+        <p id="ult-desc6">• Админка: выдать деньги, админку</p>
         <p id="ult-desc7">• Автоадминка 6 уровня для владельца</p>
-        <p id="ult-desc8">• Fly — админ-полёт</p>
-        <p id="ult-desc9">• TP — телепорт (/goto, /gethere)</p>
-        <p id="ult-desc10">• Скин — /setskin, /setadminskin</p>
-        <p id="ult-desc11">• Дубинка, тайзер для полиции</p>
-        <p id="ult-desc12">• Античит: пинг, деньги, HP</p>
         <div class="price" id="price-ult">100 ⭐</div>
         <a class="buy-btn" id="buy-ult" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20buy%20SAMP%20ULTIMATE%20v1.0" target="_blank">Купить</a>
     </div>
@@ -406,9 +403,12 @@ footer {
     <div id="compile" class="tab-content hidden">
         <h2 id="compile-title">Компиляция .pwn → .amx</h2>
         <p id="compile-desc1">Скомпилирую твой мод:</p>
-        <p id="compile-desc2">• Любой размер</p>
-        <p id="compile-desc3">• Быстро и качественно</p>
+        <p id="compile-desc2">• До 5 МБ — гарантия 100%</p>
+        <p id="compile-desc3">• Больше 5 МБ — без гарантии</p>
         <p id="compile-desc4">• Если ошибки — исправлю</p>
+        <div class="warning" id="compile-warning">
+            ⚠️ Если мод не работает и размер больше 5 МБ — возврат только той суммы, которую я получил (комиссия Telegram не возвращается).
+        </div>
         <div class="price" id="price-compile">250 ⭐</div>
         <a class="buy-btn" id="buy-compile" href="https://t.me/phoenix_aristocrat?text=Hi,%20I%20want%20to%20order%20compilation%20.pwn%20to%20.amx" target="_blank">Заказать</a>
     </div>
@@ -434,7 +434,6 @@ footer {
     © 2026 Phoenix Studio | @phoenixstudiosamp
 </footer>
 
-<!-- Промокод -->
 <div class="overlay" id="overlay" onclick="hidePromo()"></div>
 <div class="promo-popup" id="promo">
     <h2>🎁 Секретный промокод!</h2>
@@ -444,7 +443,6 @@ footer {
     <button class="close-btn" onclick="hidePromo()">Понял!</button>
 </div>
 
-<!-- Предупреждение -->
 <div class="refresh-warning" id="refresh-warning">
     ⚠️ При обновлении страницы скидка сбросится!
 </div>
@@ -474,13 +472,8 @@ const translations = {
         ultDesc3: "• Банк (вклад/снятие)",
         ultDesc4: "• Работы: курьер, шахтёр, рыбак",
         ultDesc5: "• Фракции: полиция, медики",
-        ultDesc6: "• Админка: выдать деньги, админку, скин",
+        ultDesc6: "• Админка: выдать деньги, админку",
         ultDesc7: "• Автоадминка 6 уровня для владельца",
-        ultDesc8: "• Fly — админ-полёт",
-        ultDesc9: "• TP — телепорт (/goto, /gethere)",
-        ultDesc10: "• Скин — /setskin, /setadminskin",
-        ultDesc11: "• Дубинка, тайзер для полиции",
-        ultDesc12: "• Античит: пинг, деньги, HP",
         mysqlTitle: "Подключение MySQL",
         mysqlDesc1: "Настрою базу данных для твоего мода:",
         mysqlDesc2: "• Создание таблиц",
@@ -489,9 +482,10 @@ const translations = {
         mysqlDesc5: "• Работает только с моими модами",
         compileTitle: "Компиляция .pwn → .amx",
         compileDesc1: "Скомпилирую твой мод:",
-        compileDesc2: "• Любой размер",
-        compileDesc3: "• Быстро и качественно",
+        compileDesc2: "• До 5 МБ — гарантия 100%",
+        compileDesc3: "• Больше 5 МБ — без гарантии",
         compileDesc4: "• Если ошибки — исправлю",
+        compileWarning: "⚠️ Если мод не работает и размер больше 5 МБ — возврат только той суммы, которую я получил (комиссия Telegram не возвращается).",
         contactTitle: "Связь",
         contactDesc: "Напиши нам по любому вопросу:",
         contactChannel: "📢 Канал студии",
@@ -515,13 +509,8 @@ const translations = {
         ultDesc3: "• Bank (deposit/withdraw)",
         ultDesc4: "• Jobs: courier, miner, fisherman",
         ultDesc5: "• Factions: police, medics",
-        ultDesc6: "• Admin: give money, admin, skin",
+        ultDesc6: "• Admin: give money, admin",
         ultDesc7: "• Auto-admin level 6 for owner",
-        ultDesc8: "• Fly — admin flight",
-        ultDesc9: "• TP — teleport (/goto, /gethere)",
-        ultDesc10: "• Skin — /setskin, /setadminskin",
-        ultDesc11: "• Baton, taser for police",
-        ultDesc12: "• Anticheat: ping, money, HP",
         mysqlTitle: "MySQL Connection",
         mysqlDesc1: "Setup database for your mod:",
         mysqlDesc2: "• Table creation",
@@ -530,9 +519,10 @@ const translations = {
         mysqlDesc5: "• Works only with my mods",
         compileTitle: "Compilation .pwn → .amx",
         compileDesc1: "Compile your mod:",
-        compileDesc2: "• Any size",
-        compileDesc3: "• Fast and quality",
+        compileDesc2: "• Up to 5 MB — 100% guarantee",
+        compileDesc3: "• Over 5 MB — no guarantee",
         compileDesc4: "• Fix errors if any",
+        compileWarning: "⚠️ If mod doesn't work and size is over 5 MB — refund only of the amount I received (Telegram commission is not refunded).",
         contactTitle: "Contact",
         contactDesc: "Write us for any question:",
         contactChannel: "📢 Studio Channel",
@@ -563,11 +553,6 @@ function setLang(lang) {
     document.getElementById('ult-desc5').textContent = t.ultDesc5;
     document.getElementById('ult-desc6').textContent = t.ultDesc6;
     document.getElementById('ult-desc7').textContent = t.ultDesc7;
-    document.getElementById('ult-desc8').textContent = t.ultDesc8;
-    document.getElementById('ult-desc9').textContent = t.ultDesc9;
-    document.getElementById('ult-desc10').textContent = t.ultDesc10;
-    document.getElementById('ult-desc11').textContent = t.ultDesc11;
-    document.getElementById('ult-desc12').textContent = t.ultDesc12;
     document.getElementById('mysql-title').textContent = t.mysqlTitle;
     document.getElementById('mysql-desc1').textContent = t.mysqlDesc1;
     document.getElementById('mysql-desc2').textContent = t.mysqlDesc2;
@@ -579,6 +564,7 @@ function setLang(lang) {
     document.getElementById('compile-desc2').textContent = t.compileDesc2;
     document.getElementById('compile-desc3').textContent = t.compileDesc3;
     document.getElementById('compile-desc4').textContent = t.compileDesc4;
+    document.getElementById('compile-warning').textContent = t.compileWarning;
     document.getElementById('contact-title').textContent = t.contactTitle;
     document.getElementById('contact-desc').textContent = t.contactDesc;
     document.getElementById('contact-channel').textContent = t.contactChannel;
@@ -611,33 +597,29 @@ function showPromo() {
 function hidePromo() {
     document.getElementById('overlay').classList.remove('show');
     document.getElementById('promo').classList.remove('show');
-    // Активируем скидку
     setTimeout(activateDiscount, 300);
 }
 
 function activateDiscount() {
     discountActive = true;
 
-    // TEST
     const testPrice = document.getElementById('price-test');
     testPrice.classList.add('discounted');
     testPrice.innerHTML = `<span class="old-price">${prices.test} ⭐</span> <span class="new-price">${Math.round(prices.test * 0.9)} ⭐</span>`;
 
-    // ULTIMATE
     const ultPrice = document.getElementById('price-ult');
     ultPrice.classList.add('discounted');
     ultPrice.innerHTML = `<span class="old-price">${prices.ult} ⭐</span> <span class="new-price">${Math.round(prices.ult * 0.9)} ⭐</span>`;
 
-    // COMPILE
     const compilePrice = document.getElementById('price-compile');
     compilePrice.classList.add('discounted');
     compilePrice.innerHTML = `<span class="old-price">${prices.compile} ⭐</span> <span class="new-price">${Math.round(prices.compile * 0.9)} ⭐</span>`;
 
-    // MySQL — без скидки, но показываем пометку
     const mysqlPrice = document.getElementById('price-mysql');
     mysqlPrice.innerHTML = `${prices.mysql} ⭐ <span style="font-size: 0.5em; color: #666;">(без скидки)</span>`;
 
-    // Показываем предупреждение
+    updateBuyLinks();
+
     setTimeout(() => {
         document.getElementById('refresh-warning').classList.add('show');
         setTimeout(() => {
@@ -646,7 +628,23 @@ function activateDiscount() {
     }, 500);
 }
 
-// Предупреждение при обновлении
+function updateBuyLinks() {
+    document.querySelectorAll('.buy-btn').forEach(btn => {
+        if (!btn.dataset.originalHref) {
+            btn.dataset.originalHref = btn.href;
+        }
+        const baseHref = btn.dataset.originalHref;
+        if (discountActive) {
+            const url = new URL(baseHref);
+            const text = url.searchParams.get('text');
+            url.searchParams.set('text', text + ' (промокод secret)');
+            btn.href = url.toString();
+        } else {
+            btn.href = baseHref;
+        }
+    });
+}
+
 window.addEventListener('beforeunload', function (e) {
     if (discountActive) {
         e.preventDefault();
